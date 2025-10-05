@@ -1,0 +1,7 @@
+{
+  "name": "Easy Minutes",
+  "description": "A modern, minimalist web app for recording, summarizing, and managing meeting minutes using AI.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

@@ -224,7 +224,7 @@ const MainPage: React.FC = () => {
 
     return (
         <div className="h-full flex flex-col px-4 sm:px-6 py-4 sm:py-6">
-            <div className="flex-grow flex flex-col lg:flex-row gap-4 sm:gap-6 min-h-0">
+            <div className="flex-grow flex flex-col lg:flex-row gap-4 sm:gap-6">
                 <div className="w-full lg:w-5/12 min-h-0 flex-shrink-0">
                     <NotesInput
                         notes={notes}
@@ -250,7 +250,7 @@ const MainPage: React.FC = () => {
                         )}
                     </NotesInput>
                 </div>
-                <div className="w-full lg:w-7/12 min-h-0 flex-shrink-0">
+                <div className="w-full lg:w-7/12 flex-shrink-0">
                     <SummaryDisplay />
                 </div>
             </div>

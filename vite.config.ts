@@ -11,8 +11,7 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [react()],
       define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+        'process.env.OPENAI_API_KEY': JSON.stringify(env.OPENAI_API_KEY)
       },
       css: {
         postcss: './postcss.config.js',
@@ -23,7 +22,7 @@ export default defineConfig(({ mode }) => {
         }
       },
       optimizeDeps: {
-        include: ['react', 'react-dom', 'lucide-react', '@google/genai']
+        include: ['react', 'react-dom', 'lucide-react', 'openai']
       }
     };
 });

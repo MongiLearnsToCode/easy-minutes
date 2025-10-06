@@ -13,7 +13,7 @@ import RichTextToolbar from '../components/RichTextToolbar';
 
 
 const Card: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className }) => (
-    <div className={`bg-white rounded-2xl shadow-lg shadow-slate-200/80 p-6 sm:p-8 h-full flex flex-col ${className}`}>
+    <div className={`bg-white rounded-2xl shadow-lg shadow-slate-200/80 p-4 sm:p-6 lg:p-8 h-full flex flex-col ${className}`}>
         {children}
     </div>
 );
@@ -26,7 +26,7 @@ const NotesInput: React.FC<{ notes: string; onNotesChange: (notes: string) => vo
                 placeholder="Untitled Meeting"
                 value={title}
                 onChange={(e) => onTitleChange(e.target.value)}
-                className="text-2xl font-bold text-slate-800 placeholder-slate-300 w-full bg-transparent border-none focus:outline-none focus:ring-0 mb-4"
+                className="text-xl sm:text-2xl font-bold text-slate-800 placeholder-slate-300 w-full bg-transparent border-none focus:outline-none focus:ring-0 mb-3 sm:mb-4"
             />
             {children}
             <div className="bg-slate-50 rounded-lg flex-grow flex flex-col">
@@ -103,23 +103,23 @@ const SummaryDisplay: React.FC = () => {
 
     return (
         <Card className="w-full">
-            <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-200">
-                <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-bold text-slate-800">Generated Minutes</h2>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0 mb-4 pb-4 border-b border-slate-200">
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <h2 className="text-xl sm:text-2xl font-bold text-slate-800">Generated Minutes</h2>
                      {dashboardSaveStatus && (
-                        <span className="text-sm font-medium text-green-600 bg-green-100 px-2 py-1 rounded-md animate-fade-in">
+                        <span className="text-xs sm:text-sm font-medium text-green-600 bg-green-100 px-2 py-1 rounded-md animate-fade-in">
                             {dashboardSaveStatus}
                         </span>
                     )}
                 </div>
 
                 {summary && !isLoading && !error && (
-                    <div className="flex items-center gap-4">
-                        <button onClick={onExport} className="text-sm font-semibold text-[#FF8A65] hover:underline focus:outline-none flex items-center gap-1.5">
-                            <ExportIcon className="w-4 h-4" />
+                    <div className="flex items-center gap-3 sm:gap-4">
+                        <button onClick={onExport} className="text-xs sm:text-sm font-semibold text-[#FF8A65] hover:underline focus:outline-none flex items-center gap-1.5">
+                            <ExportIcon className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                             <span>Export</span>
                         </button>
-                        <button onClick={handleToggleEdit} className="text-sm font-semibold text-[#FF8A65] hover:underline focus:outline-none">
+                        <button onClick={handleToggleEdit} className="text-xs sm:text-sm font-semibold text-[#FF8A65] hover:underline focus:outline-none">
                             {isEditing ? 'View' : 'Edit'}
                         </button>
                     </div>
@@ -223,9 +223,9 @@ const MainPage: React.FC = () => {
     };
 
     return (
-        <div className="h-full flex flex-col px-4 sm:px-6 py-6">
-            <div className="flex-grow flex flex-col md:flex-row gap-6 min-h-0">
-                <div className="w-full md:w-5/12 min-h-0">
+        <div className="h-full flex flex-col px-4 sm:px-6 py-4 sm:py-6">
+            <div className="flex-grow flex flex-col lg:flex-row gap-4 sm:gap-6 min-h-0">
+                <div className="w-full lg:w-5/12 min-h-0 flex-shrink-0">
                     <NotesInput
                         notes={notes}
                         onNotesChange={handleNotesChange}
@@ -250,25 +250,25 @@ const MainPage: React.FC = () => {
                         )}
                     </NotesInput>
                 </div>
-                <div className="w-full md:w-7/12 min-h-0">
+                <div className="w-full lg:w-7/12 min-h-0 flex-shrink-0">
                     <SummaryDisplay />
                 </div>
             </div>
 
             <footer className="flex-shrink-0 mt-4">
-                <div className={`bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg shadow-slate-200/80 p-4 max-w-4xl mx-auto flex items-center justify-between transition-colors duration-300 ${isRecordingActive ? 'bg-red-50/80' : ''}`}>
-                    <div className="flex items-center gap-2 sm:gap-4">
-                        <button onClick={resetMeeting} className="flex items-center gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-4 py-2 transition-all duration-300 font-semibold text-sm">
+                <div className={`bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg shadow-slate-200/80 p-3 sm:p-4 max-w-4xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-0 transition-colors duration-300 ${isRecordingActive ? 'bg-red-50/80' : ''}`}>
+                    <div className="flex items-center gap-2 sm:gap-4 overflow-x-auto">
+                        <button onClick={resetMeeting} className="flex items-center gap-1.5 sm:gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-3 sm:px-4 py-2 transition-all duration-300 font-semibold text-xs sm:text-sm whitespace-nowrap">
                             <span>New Meeting</span>
                         </button>
                         <div className="h-6 border-l border-slate-300"></div>
                          {recordingState === RecordingState.IDLE ? (
                             <>
-                                <button onClick={startRecording} className="flex items-center gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-4 py-2 transition-all duration-300 font-semibold text-sm">
+                                <button onClick={startRecording} className="flex items-center gap-1.5 sm:gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-3 sm:px-4 py-2 transition-all duration-300 font-semibold text-xs sm:text-sm whitespace-nowrap">
                                     <MicIcon className="w-4 h-4" />
                                     <span>Record</span>
                                 </button>
-                                <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-4 py-2 transition-all duration-300 font-semibold text-sm">
+                                <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-1.5 sm:gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-3 sm:px-4 py-2 transition-all duration-300 font-semibold text-xs sm:text-sm whitespace-nowrap">
                                     <UploadIcon className="w-4 h-4" />
                                     <span>Upload</span>
                                 </button>
@@ -282,17 +282,17 @@ const MainPage: React.FC = () => {
                             </>
                         ) : (
                             <>
-                                <button onClick={stopRecording} className="flex items-center gap-2 text-white bg-red-500 hover:bg-red-600 rounded-full px-4 py-2 transition-all duration-300 font-semibold text-sm">
+                                <button onClick={stopRecording} className="flex items-center gap-1.5 sm:gap-2 text-white bg-red-500 hover:bg-red-600 rounded-full px-3 sm:px-4 py-2 transition-all duration-300 font-semibold text-xs sm:text-sm whitespace-nowrap">
                                     <StopIcon className="w-4 h-4" />
                                     <span>Stop</span>
                                 </button>
                                 {recordingState === RecordingState.RECORDING ? (
-                                    <button onClick={pauseRecording} className="flex items-center gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-4 py-2 transition-all duration-300 font-semibold text-sm">
+                                    <button onClick={pauseRecording} className="flex items-center gap-1.5 sm:gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-3 sm:px-4 py-2 transition-all duration-300 font-semibold text-xs sm:text-sm whitespace-nowrap">
                                         <PauseIcon className="w-4 h-4" />
                                         <span>Pause</span>
                                     </button>
-                                ) : ( // PAUSED state
-                                    <button onClick={resumeRecording} className="flex items-center gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-4 py-2 transition-all duration-300 font-semibold text-sm">
+                                ) : (
+                                    <button onClick={resumeRecording} className="flex items-center gap-1.5 sm:gap-2 text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full px-3 sm:px-4 py-2 transition-all duration-300 font-semibold text-xs sm:text-sm whitespace-nowrap">
                                         <MicIcon className="w-4 h-4" />
                                         <span>Resume</span>
                                     </button>
@@ -303,15 +303,19 @@ const MainPage: React.FC = () => {
                                 </div>
                             </>
                         )}
-                        <div className="hidden sm:block border-l border-slate-200 pl-4 ml-2">
+                        <div className="hidden lg:block border-l border-slate-200 pl-4 ml-2">
                             <p className="text-xs text-slate-500">Summaries left: <span className="font-semibold text-slate-800">{summariesLeft}/{freeSummaryLimit}</span></p>
                             <Link to="/pricing" className="text-xs text-[#FF8A65] hover:underline font-semibold">Upgrade Plan</Link>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
+                        <div className="lg:hidden text-center sm:text-left">
+                            <p className="text-xs text-slate-500">Summaries: <span className="font-semibold text-slate-800">{summariesLeft}/{freeSummaryLimit}</span> • <Link to="/pricing" className=\"text-[#FF8A65] hover:underline font-semibold">Upgrade</Link></p>
+                        </div>
                         <ActionButton onClick={handleGenerate} disabled={isLoading || !hasContent || summariesLeft <= 0} icon={isLoading ? <LoadingSpinner className="w-5 h-5" /> : <GenerateIcon className="w-5 h-5" />}>
-                            {isLoading ? 'Generating' : 'Generate Minutes'}
+                            <span className="hidden sm:inline">{isLoading ? 'Generating' : 'Generate Minutes'}</span>
+                            <span className="sm:hidden">{isLoading ? 'Generating' : 'Generate'}</span>
                         </ActionButton>
                     </div>
                 </div>

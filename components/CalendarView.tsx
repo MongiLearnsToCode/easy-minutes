@@ -60,17 +60,17 @@ const CalendarView: React.FC<{ meetings: Meeting[]; onView: (id: string) => void
     const today = new Date();
 
     return (
-        <div className="bg-white rounded-2xl shadow-lg shadow-slate-200/80 p-6 flex flex-col animate-fade-in">
-            <header className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-slate-800">{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
+        <div className="bg-white rounded-2xl shadow-lg shadow-slate-200/80 p-4 sm:p-6 flex flex-col animate-fade-in">
+            <header className="flex justify-between items-center mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-800">{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
                 <div className="flex items-center space-x-1">
-                    <button onClick={() => changeMonth(-1)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"><ChevronLeftIcon className="w-5 h-5"/></button>
-                    <button onClick={() => changeMonth(1)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"><ChevronRightIcon className="w-5 h-5"/></button>
+                    <button onClick={() => changeMonth(-1)} className="p-1.5 sm:p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"><ChevronLeftIcon className="w-4 sm:w-5 h-4 sm:h-5"/></button>
+                    <button onClick={() => changeMonth(1)} className="p-1.5 sm:p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"><ChevronRightIcon className="w-4 sm:w-5 h-4 sm:h-5"/></button>
                 </div>
             </header>
 
-            <div className="grid grid-cols-7 text-center text-sm font-semibold text-slate-500 border-b border-slate-200">
-                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => <div key={day} className="py-2">{day}</div>)}
+            <div className="grid grid-cols-7 text-center text-xs sm:text-sm font-semibold text-slate-500 border-b border-slate-200">
+                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => <div key={day} className="py-1.5 sm:py-2">{day}</div>)}
             </div>
 
             <div className="grid grid-cols-7 grid-rows-6 border-l border-t border-slate-200">
@@ -81,13 +81,13 @@ const CalendarView: React.FC<{ meetings: Meeting[]; onView: (id: string) => void
                     const MAX_VISIBLE_MEETINGS = 2;
 
                     const cellClasses = `
-                        border-r border-b border-slate-200 p-2 flex flex-col h-28 overflow-hidden relative transition-colors duration-200
+                        border-r border-b border-slate-200 p-1 sm:p-2 flex flex-col h-20 sm:h-28 overflow-hidden relative transition-colors duration-200
                         ${isCurrentMonth ? 'bg-white' : 'bg-slate-50'}
                         ${dayMeetings.length > 0 && isCurrentMonth ? 'cursor-pointer hover:bg-slate-100' : ''}
                     `;
                     
                     const dayNumberClasses = `
-                        flex items-center justify-center w-7 h-7 rounded-full text-sm font-medium
+                        flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full text-xs sm:text-sm font-medium
                         ${isCurrentMonth ? 'text-slate-600' : 'text-slate-400'}
                         ${isToday ? 'bg-[#FF8A65] text-white' : ''}
                     `;
@@ -101,23 +101,23 @@ const CalendarView: React.FC<{ meetings: Meeting[]; onView: (id: string) => void
                                 <span className={dayNumberClasses}>{day.getDate()}</span>
                             </div>
                             {isCurrentMonth && (
-                                <div className="flex-grow mt-1 space-y-1 overflow-y-auto -mr-2 pr-2">
+                                <div className="flex-grow mt-0.5 sm:mt-1 space-y-0.5 sm:space-y-1 overflow-y-auto -mr-1 sm:-mr-2 pr-1 sm:pr-2">
                                     {dayMeetings.slice(0, MAX_VISIBLE_MEETINGS).map(meeting => (
                                         <div key={meeting.id} className="group relative">
                                             <div
                                                 onClick={(e) => { e.stopPropagation(); onView(meeting.id); }}
-                                                className="w-full text-left text-xs bg-orange-100 text-orange-800 font-semibold rounded px-2 py-1 truncate cursor-pointer hover:bg-orange-200 hover:text-orange-900"
+                                                className="w-full text-left text-[10px] sm:text-xs bg-orange-100 text-orange-800 font-semibold rounded px-1 sm:px-2 py-0.5 sm:py-1 truncate cursor-pointer hover:bg-orange-200 hover:text-orange-900"
                                                 title={meeting.title}
                                             >
                                                 {meeting.title}
                                             </div>
-                                            <div className="absolute bottom-full mb-1 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                                            <div className="hidden sm:block absolute bottom-full mb-1 w-max max-w-xs left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                                                 {meeting.title}
                                             </div>
                                         </div>
                                     ))}
                                     {dayMeetings.length > MAX_VISIBLE_MEETINGS && (
-                                        <div className="text-xs text-blue-600 font-bold pt-1 cursor-pointer hover:underline">
+                                        <div className="text-[10px] sm:text-xs text-blue-600 font-bold pt-0.5 sm:pt-1 cursor-pointer hover:underline">
                                             + {dayMeetings.length - MAX_VISIBLE_MEETINGS} more
                                         </div>
                                     )}
